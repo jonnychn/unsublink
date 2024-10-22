@@ -6,10 +6,17 @@ async function handleUnsubscribe(event) {
     const email = document.getElementById('email').value;
 
     if (email) {
-        // Simulate the API request to unsubscribe the email
-        console.log(`Unsubscribing: ${email}`);
+        // Send POST request to Google Apps Script
+        const response = await fetch('https://script.google.com/macros/s/AKfycbzw_OH6gJ0QIrdaQSKB6hsdU_8QzYhL5vaU5ybOCWonlj-rwq9zpNb2hfZxmvtCo2pL/exec', {
+            method: 'POST',
+            mode: 'no-cors', // To prevent CORS issues
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `email=${encodeURIComponent(email)}`,
+        });
 
-        // Simulate a successful unsubscription
+        // Simulate successful unsubscription
         alert('You have successfully unsubscribed.');
     } else {
         alert('Error: Email not found.');
